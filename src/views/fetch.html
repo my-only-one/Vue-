@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>fetch</title>
+</head>
+<body>
+<script src="https://vuejs.org/js/vue.js"></script>
+<div id="app">
+  <form @submit.prevent="onsubmit">
+    <input type="text" v-model="list.title">
+    <input type="checkbox" v-model="list.completed">
+    <input type="submit" value="提交">
+  </form>
+  <ul>
+    <li v-for="item in todo">
+      <h3>{{item.title}}</h3>
+      <p v-if="item.completed">{{item.completed}}</p>
+    </li>
+  </ul>
+</div>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data() {
+      return {
+        todo: [],
+        list: {
+          title: '',
+          completed: false
+        }
+      }
+    },
+    mounted () {
+      fetch('http://jsonplaceholder.typicode.com/todos')
+        .then(res => {
+          return res.json()
+        })
+        .then(result => {
+          this.todo = result
+        });
+    },
+    methods: {
+      onsubmit () {
+        fetch('http://jsonplaceholder.typicode.com/todos',{
+          method: 'POST', // or 'PUT'
+          body: JSON.stringify(this.list), // data can be `string` or {object}!
+          headers: new Headers({
+            'Content-Type': 'application/json'
+          })
+        })
+          .then(res => {
+            return res.json()
+          })
+          .then(result => {
+            this.todo.unshift(result)
+          });
+      }
+    }
+  })
+</script>
+</body>
+</html>
