@@ -1,0 +1,291 @@
+@charset "utf-8";
+/* CSS Document */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; list-style: none;-webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+body { -webkit-overflow-scrolling:touch;width:100%; font-size: 1rem; -webkit-font-smoothing: antialiased;   font-family:/*"STXihei","HanHei SC","Source Han Sans","Hiragino Sans GB", "Arial", "Verdana", "sans-serif","STHeiti Light", "Helvetica",*/ "Microsoft YaHei"; }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block;}
+ul, ul li, ol li, li {	list-style:none;}
+table {	border-collapse: collapse;	border-spacing: 0;}
+input, textarea {border: 0;	outline: none;  -webkit-appearance: none; padding:0; margin:0; /*去掉内部阴影*/}
+input[type=input]{-webkit-appearance:none; background-color:rgba(255,255,255,0.1);}/*移除ios样式*/
+input[type=checkbox]{-webkit-appearance:checkbox;}
+/*input:-webkit-autofill 导致chrome的输入框背景颜色变成黄色*/
+/*第一种方法*/
+input:-webkit-autofill {
+    transition:background-color 5000s ease-in-out 0s;
+}
+/*第二种方法*/
+/*input{
+	-webkit-box-shadow: 0 0 0px 1000px white inset
+}*/
+/*去除a标签的虚线框*/
+a {blr:expression(this.onFocus=this.blur()); outline: none; text-decoration:none;}
+html {width:100%; min-height:100%; /*font-size:10px;*/  -webkit-text-size-adjust: 100%;/*禁止文本缩放*/}
+.clearfix:after {visibility: hidden;display: block;	font-size: 0;content: ".";	clear: both;height: 0;}
+/** { touch-action: pan-y; }*/
+::-webkit-input-placeholder{ color:#999;}
+.fr {float: right;}
+.fl {float: left;}
+.none{ display:none;}
+.box{ width:100%; display:-webkit-box; display:box; text-align:left;}
+.flex{ -webkit-box-flex:1; box-flex:1;}
+a:hover{text-decoration: none !important;}
+.mask{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.3);
+}
+.wrapper{background-color: #fff;}
+* {
+    -webkit-overflow-scrolling: touch
+}
+/*动画帧*/
+@-webkit-keyframes transx_left{
+    0%{-webkit-opacity:0;-webkit-transform:translateX(-50%); }
+    100%{-webkit-opacity:1;-webkit-transform:translateX(0);}
+}
+@keyframes transx_left{
+    0%{opacity:0;transform:translateX(-50%);}
+    100%{opacity:1;transform:translateX(0);}
+}
+@-webkit-keyframes transx_right{
+    0%{-webkit-opacity:0;-webkit-transform:translateX(50%);}
+    100%{-webkit-opacity:1;-webkit-transform:translateX(0);}
+}
+@keyframes transx_right{
+    0%{opacity:0;transform:translateX(50%);}
+    100%{opacity:1;transform:translateX(0);}
+}
+@-webkit-keyframes transy_up{
+    0%{-webkit-opacity:0;-webkit-transform:translateY(-50%);}
+    100%{-webkit-opacity:1;-webkit-transform:translateY(0);}
+}
+@keyframes transy_up{
+    0%{opacity:0;transform:translateY(-50%)}
+    100%{opacity:1;transform:translateY(0);}
+}
+@-webkit-keyframes transy_down{
+    0%{-webkit-opacity:0;-webkit-transform:translateY(50%);}
+    100%{-webkit-opacity:1;-webkit-transform:translateY(0);}
+}
+@keyframes transy_down{
+    0%{opacity:0;transform:translateY(50%);}
+    100%{opacity:1;transform:translateY(0);}
+}
+@-webkit-keyframes trans_rota{
+    0%{-webkit-transform:rotate(0);}
+    100%{-webkit-transform:rotate(360deg);}
+}
+@keyframes trans_rota{
+    0%{ transform:rotate(0);}
+    100%{ transform:rotate(360deg);}
+}
+@-webkit-keyframes fade_in{
+    0% { opacity: 0; }
+    100% {  opacity: 1; }
+}
+@keyframes fade_in{
+    0% {  opacity: 0; }
+    100% {  opacity: 1; }
+}
+
+.hide{overflow: hidden;  text-overflow: ellipsis;  white-space: nowrap;}
+
+[v-cloak] {
+    opacity: 0;
+}
+@font-face {
+    font-family: 'm-iconfont';  /* project id 657935 */
+    src: url('//at.alicdn.com/t/font_657935_jb6gj3vpcg.eot');
+    src: url('//at.alicdn.com/t/font_657935_jb6gj3vpcg.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_657935_jb6gj3vpcg.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_657935_jb6gj3vpcg.woff') format('woff'),
+    url('//at.alicdn.com/t/font_657935_jb6gj3vpcg.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_657935_jb6gj3vpcg.svg#m-iconfont') format('svg');
+}
+
+.daq-icon{
+    font-family:"m-iconfont" !important;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+/*接口结果提示 start*/
+.no-data, .no-data1, .try-refresh, .try-refresh1 {
+    /*position: relative;*/
+    width: 100%;
+    height: 100%;
+    font-size: 15px;
+    color: red;
+    text-align: center;
+}
+.no-data img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    /*transform: translate(-50%,-50%);*/
+    margin-left: -75px;
+    margin-top: -68px;
+}
+.no-data1, .try-refresh1 {
+    padding-top: 100px;
+}
+/*接口结果提示 end*/
+
+/*加载提示 start*/
+.loading-tips, .dy-loading-tips {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.dy-loading-tips {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.loading-tips p, .dy-loading-tips p {
+    font: 18px/34px "microsoft yahei";
+}
+
+.loading-tips img, .dy-loading-tips img {
+    width: 65px;
+    height: 65px;
+}
+/*加载提示 end*/
+
+.animation-fade-in {
+    animation: fadeIn ease .3s forwards
+}
+.animation-fade-out {
+    animation: fadeOut ease .3s forwards;
+    animation-delay: .3s
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+@keyframes fadeOut {
+    0% {
+        opacity: 1
+    }
+
+    to {
+        opacity: 0
+    }
+}
+
+.animation-translate-top-in {
+    animation: topIn ease .4s forwards
+}
+.animation-translate-top-out {
+    animation: topOut ease .4s forwards
+}
+
+@keyframes topIn {
+    0% {
+        transform: translateY(-100%)
+    }
+
+    to {
+        transform: translateY(0)
+    }
+}
+@keyframes topOut {
+    0% {
+        transform: translateY(0)
+    }
+
+    to {
+        transform: translateY(-100%)
+    }
+}
+
+.animation-translate-bottom-in {
+    animation: bottomIn ease .4s forwards
+}
+.animation-translate-bottom-out {
+    animation: bottomOut ease .4s forwards
+}
+
+@keyframes bottomIn {
+    0% {
+        transform: translateY(100%)
+    }
+
+    to {
+        transform: translateY(0)
+    }
+}
+@keyframes bottomOut {
+    0% {
+        transform: translateY(0)
+    }
+
+    to {
+        transform: translateY(100%)
+    }
+}
+
+.animation-translate-right-in {
+    animation: rightIn ease .4s forwards
+}
+.animation-translate-right-out {
+    animation: rightOut ease .4s forwards
+}
+
+@keyframes rightIn {
+    0% {
+        transform: translateX(100%)
+    }
+
+    to {
+        transform: translateX(0)
+    }
+}
+@keyframes rightOut {
+    0% {
+        transform: translateX(0)
+    }
+
+    to {
+        transform: translateX(100%)
+    }
+}
+
+.animation-translate-left-in {
+    animation: leftIn ease .4s forwards
+}
+.animation-translate-left-out {
+    animation: leftOut ease .5s forwards
+}
+
+@keyframes leftIn {
+    0% {
+        transform: translateX(-100%)
+    }
+
+    to {
+        transform: translateX(0)
+    }
+}
+@keyframes leftOut {
+    0% {
+        transform: translateX(0)
+    }
+
+    to {
+        transform: translateX(-100%)
+    }
+}

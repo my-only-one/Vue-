@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>axios</title>
+</head>
+<body>
+<script src="https://vuejs.org/js/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<div id="app">
+  <form @submit.prevent="onsubmit">
+    <input type="text" v-model="list.title">
+    <input type="checkbox" v-model="list.completed">
+    <input type="submit" value="提交">
+  </form>
+  <ul>
+    <li v-for="item in todo">
+      <h3>{{item.title}}</h3>
+      <p v-if="item.completed">{{item.completed}}</p>
+    </li>
+  </ul>
+</div>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data() {
+      return {
+        todo: [],
+        list: {
+          title: '',
+          completed: false
+        }
+      }
+    },
+    mounted () {
+      axios.get('http://jsonplaceholder.typicode.com/todos')
+        .then(res => {
+          console.log(res)
+          this.todo = res.data
+        });
+    },
+    methods: {
+      onsubmit () {
+        axios.post('http://jsonplaceholder.typicode.com/todos', this.list)
+          .then(res => {
+            console.log(res.data)
+            this.todo.unshift(res.data)
+          });
+      }
+    }
+  })
+</script>
+</body>
+</html>
